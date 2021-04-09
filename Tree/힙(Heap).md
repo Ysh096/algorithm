@@ -100,6 +100,69 @@ class MaxHeap(object):
 
 
 
+### 최소힙 직접 구현
+
+```python
+
+
+# 삽입
+"""
+(완전 이진트리의 마지막에)
+1) heap 가장 마지막에 원소 삽입
+2) 부모 & 자식 비교하며 swap
+"""
+def heap_push(value):
+    # value -> node의 값 / heap_count -> node의 index
+    global heap_count
+    heap_count += 1
+    heap[heap_count] = value
+    # child & parent (parent = child // 2)
+    # 자식 > 부모일 때 스왑
+    while True:
+        if heap[heap_count] < heap[heap_count//2]:
+            heap[heap_count], heap[heap_count//2] = heap[heap_count//2], heap[heap_count]
+        else:
+            break
+
+# 삭제
+"""
+1) 루트 노드의 원소 삭제
+2) 마지막 노드 삭제 후 루트 노드에 삽입 (heap의 모양 유지)
+3) (자리가 확정될 때까지) 부모 & 자식 비교하며 swap 
+"""
+def heap_pop():
+    global heap_count
+    ans = heap[1]
+    last = heap[heap_count]
+    heap[heap_count] = 0
+    heap_count -= 1
+    heap[1] = last
+
+    for i in range(heap_count, 0, -1):
+        if heap[i] < heap[i//2]:
+            heap[i], heap[i//2] = heap[i//2], heap[i]
+    return ans
+
+heap_count = 0
+temp = [7, 2, 5, 3, 4, 6]
+N = len(temp)
+heap = [0] * (N+1)
+
+##########################################################
+
+# 삽입 연산
+for i in range(N):
+    heap_push(temp[i])
+
+print(*heap) # 0 2 3 5 7 4 6
+
+# 삭제 연산
+for i in range(N):
+    print(heap_pop(), end=' ') # 2 3 4 5 6 7
+```
+
+
+
 # 파이썬 모듈 heapq
 
 ```python
@@ -140,6 +203,7 @@ def solution(scoville, K):
         return -1
     else:
         return cnt
-Co
 ```
+
+
 

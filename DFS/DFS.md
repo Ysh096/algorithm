@@ -296,7 +296,7 @@ power_set(0)
 
 
 
-## 예제4. n-queen
+## 예제4. 백준9663_N-Queen
 
 ```python
 n = int(input())
@@ -357,7 +357,7 @@ print(answer)
 
 
 
-## 예제4. swea 4881_배열최소합
+## 예제5. swea 4881_배열최소합
 
 ```python
 def min_sum(i, cols, result):
